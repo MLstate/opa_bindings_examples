@@ -6,6 +6,8 @@ opa-debug-js
 _build
 *.opx
 *.opx.broken
+*.opp
+*.o
 *.dump
 *~
 .DS_Store

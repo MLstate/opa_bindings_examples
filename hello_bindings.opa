@@ -1,25 +1,29 @@
 plugin_stammer = %%plugin.stammer%%
 
-@server stammer_server = plugin_stammer
-@client stammer_client = plugin_stammer
+server stammer_server = plugin_stammer
+client stammer_client = plugin_stammer
 
-stammer(a, side) =
-  match side with
-  | {client} -> stammer_client(a)
-  | {server} -> stammer_server(a)
+function stammer(a, side) {
+  match (side) {
+    case {on_client}: stammer_client(a)
+    case {on_server}: stammer_server(a)
+  }
+}
 
-action(side) =
+function action(side) {
   a = Dom.get_value(#input_a)
-  Dom.transform([ #result <- stammer(a, side) ])
+  #result = stammer(a, side)
+}
 
-button(id, message, side) =
-  <a id={id:string}
+function button(string id, string message, side) {
+  <a id={id}
      class="button"
      ref="#"
-     onclick={_->action(side)}>{message:string}
+     onclick={function(_) { action(side) }}>{message}
   </a>
+}
 
-page() =
+function page() {
   <>
   <h1>Hello Bindings</h1>
   <h2>Argument</h2>
@@ -28,8 +32,11 @@ page() =
   <div id="result" />
   <br/>
   <h2>Calling functions (using argument input)</h2>
-  {button("stammer_client", "Compute stammer on the client", {client})}<br/>
-  {button("stammer_server", "Compute stammer on the server", {server})}<br/>
+  {button("stammer_client", "Compute stammer on the client", {on_client})}<br/>
+  {button("stammer_server", "Compute stammer on the server", {on_server})}<br/>
   </>
+}
 
-server = one_page_server("Hello Bindings", page)
+Server.start(Server.http,
+  Server.simple({title: "Hello Bindings", ~page})
+)
