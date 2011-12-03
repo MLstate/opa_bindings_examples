@@ -37,6 +37,5 @@ function page() {
   </>
 }
 
-Server.start(Server.http,
-  Server.simple({title: "Hello Bindings", ~page})
-)
+Server.start(Server.http, {title: "Hello Bindings", ~page})
+

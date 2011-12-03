@@ -79,6 +79,5 @@ function page() {
   </>
 }
 
-Server.start(Server.http,
-  Server.simple({title: "Bigint Binding", ~page})
-)
+Server.start(Server.http, {title: "Bigint Binding", ~page})
+
