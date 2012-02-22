@@ -4,15 +4,16 @@ server stammer_server = plugin_stammer
 client stammer_client = plugin_stammer
 
 function stammer(a, side) {
-  match (side) {
-    case {on_client}: stammer_client(a)
-    case {on_server}: stammer_server(a)
-  }
+    match (side) {
+    case { on_client }: stammer_client(a);
+    case { on_server }: stammer_server(a);
+    }
+
 }
 
 function action(side) {
-  a = Dom.get_value(#input_a)
-  #result = stammer(a, side)
+    a = Dom.get_value(#input_a);
+    #result = stammer(a, side);
 }
 
 function button(string id, string message, side) {
@@ -37,5 +38,4 @@ function page() {
   </>
 }
 
-Server.start(Server.http, {title: "Hello Bindings", ~page})
-
+Server.start(Server.http, {title: "Hello Bindings", ~page});
