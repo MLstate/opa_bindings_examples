@@ -1,3 +1,6 @@
+OPA ?= opa
+OPA_PLUGIN_BUILDER ?= opa-plugin-builder
+
 all : plugin opa
 
 plugin:
@@ -5,7 +8,7 @@ plugin:
 
 opa:
 	$(OPA) plugin.opp hello_bindings.opa
-	@echo "run: ./hello_bindings.exe"
+	@echo "run: ./hello_bindings.js"
 
 clean:
 	rm -rf hello_bindings.exe
