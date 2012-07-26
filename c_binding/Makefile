@@ -1,3 +1,6 @@
+OPA ?= opa
+OPA_PLUGIN_BUILDER ?= opa-plugin-builder
+
 DIR:=$(shell pwd)
 
 all: freq.o plugin opa
@@ -10,7 +13,7 @@ plugin:
 
 opa:
 	$(OPA) --mllopt $(DIR)/freq.o c_binding.opp freq.opa
-	@echo "run: ./freq.exe" 
+	@echo "run: ./freq.js"
 
 clean:
 	rm -rf c_binding.opp
